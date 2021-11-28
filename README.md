@@ -10,4 +10,26 @@ Here is an example of the synthesis problem. The target program f(x, y) = 10 \* 
 
 As the candidate program size increases, the number of generated candidates increases exponentially. If constant '10' was in the grammar, the more efficient program could be synthesized quickly. However, finding the needed constant is difficult task if the target program code is not public, and you can only use the log data of the target program. The same thing is applied to the parameters and operators. This is why I'm doing this project. I want to find the best combination of parameters, operations and constants. This is already NP problem even though it's not combined with selecting the in/output examples due to a combination of numerous constants.  
 
-Now moving on to the in/output example combinations, It is also NP problem because a portion of in/output examples are selected from all possible examples. This also means that the larger the input range, the greater the number of combinations will increase. If the number of examples is too small, then the synthesisd program will be too different from the target program. On the contrary, if the number of examples is too large, then it will take a very long time to synthesize. After all, the goal is to synthesize programs that can be synthesized within a given time, have high accuracy, and have small code sizes.
+Now moving on to the in/output example combinations, It is also NP problem because a portion of in/output examples are selected from all possible examples. This also means that the larger the input range, the greater the number of combinations will increase. If the number of examples is too small, then the synthesisd program will be too different from the target program. On the contrary, if the number of examples is too large, then it will take a very long time to synthesize. After all, the goal is to synthesize programs that can be synthesized within a given time, have high accuracy, and have small code sizes.  
+
+## Design decision explaining why you select:
+### Parameters such as the size of an initial population.
+It depends on the difficulty of the problem, but each synthesis problem takes a very long time compared to other problems. Still, since it uses little memory, the  synthesis tasks (initial population) can be synthesized concurrently. So the size of the initial population is the number of times the synthesis is successful within a given time (ex. within ten minutes). it depends on hardware specifications such as CPU cores.
+
+### Stopping criteria.
+It stops if the target accuracy and code size given to the user are achieved, or the total execution timeout is exceeded.
+
+### Fitness function.
+The accuracy of each synthesized program (indivisual) is calculated by executing 1,000 in/output tests. The number of uses of parameters, operators, and constants used in each synthesized program (code size) is also calculated. This can be said to be a multi-objective optimization progblem.
+
+### Selection operator.
+I will use tournament selection method.
+
+### Crossover operator.
+aa  
+
+### Mutation operator.
+aa  
+
+### Generational selection strategy.
+aa  
