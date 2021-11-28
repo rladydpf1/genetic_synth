@@ -29,7 +29,7 @@ I will use the tournament selection method.
 Before crossover, we need to collect parameters, operators, and constants used in the actual synthesized, not in the specification. In addition, a simple constant folding is also needed (ex. from 1 + 1 + 1 to 3). In this case, the constant '3' is actually used, and if the constant '1' is not used elsewhere, '1' is not actually used. Then the child only has the union of actually used parts between its parents. That is the crossover operation of syntactic restrictions. The crossover operator of in/output examples is just the union of random combinations of in/output examples in each parent.
 
 ### Mutation operator.
-There is the deletion of in/output examples, the deletion of grammars, the addition of in/output examples, and the addition of grammars. These operators are randomly performed.
+There are deleting in/output examples, deleting grammars, adding in/output examples, and adding grammars. These operators are randomly performed.
 
 ### Generational selection strategy.
 All individuals are sorted in the order of high scores in the fitness function, and only the number of the initial population is selected as the next population.
