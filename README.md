@@ -17,16 +17,16 @@ Now moving on to the in/output example combinations, It is also NP problem becau
 It depends on the difficulty of the problem, but each synthesis problem takes a very long time compared to other problems. Still, since it uses little memory, the  synthesis tasks (initial population) can be synthesized concurrently. So the size of the initial population is the number of times the synthesis is successful within a given time (ex. within ten minutes). it depends on hardware specifications such as CPU cores.
 
 ### Stopping criteria.
-It stops if the target accuracy and code size given to the user are achieved, or the total execution timeout is exceeded.
+It stops if the target accuracy and code size given to the user are achieved, or the total execution timeout (ex. within 1 hour) is exceeded.
 
 ### Fitness function.
-The accuracy of each synthesized program (indivisual) is calculated by executing 1,000 in/output tests. The number of uses of parameters, operators, and constants used in each synthesized program (code size) is also calculated. This can be said to be a multi-objective optimization progblem.
+The accuracy of each synthesized program (indivisual) is calculated by executing 1,000 in/output tests. The number of uses of parameters, operators, and constants used in each synthesized program (code size) is also calculated. This may be said to a multi-objective optimization progblem. But the most important thing is accuracy, so the time we need a code size is when the accuracy is similar (ex. +/-10%).
 
 ### Selection operator.
 I will use tournament selection method.
 
 ### Crossover operator.
-aa  
+Before crossover, we need to collect parameters, operators, and constants used in the actual synthesized, not in the specfication. We also need to do a simple constant folding (ex. from 1 + 1 + 1 + 1 + 1 to 5). In this case, the constant '5' is accually used, and if the constant '1' is not used elsewhere, '1' is also not actually used. Then the descendant has only the union of actually used grammars between parents. That is the crossover operation of syntactic restrictions. The crossover operator of in/output examples is just the union of combinations of in/output examples in each parent.
 
 ### Mutation operator.
 aa  
