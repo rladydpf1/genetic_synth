@@ -1,0 +1,5 @@
+
+#!/bin/bash
+PYTHONPATH=/home/yoel/project/eusolver/scripts/thirdparty/z3/build/python:/home/yoel/project/eusolver/scripts/thirdparty/libeusolver/build:$PYTHONPATH python3 src/benchmarks.py benchmarks/example/problem1.sl
+# EOF
+
