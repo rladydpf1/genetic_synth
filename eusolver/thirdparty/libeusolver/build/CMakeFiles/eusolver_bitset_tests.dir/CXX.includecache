@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/yoel/eusolver/thirdparty/libeusolver/src/BitSet.hpp
+string
+-
+utility
+-
+cstring
+-
+cstdlib
+-
+exception
+-
+iterator
+-
+EUSolverTypes.h
+/home/yoel/eusolver/thirdparty/libeusolver/src/EUSolverTypes.h
+
+/home/yoel/eusolver/thirdparty/libeusolver/src/EUSolverTypes.h
+cinttypes
+-
+cstdint
+-
+inttypes.h
+-
+stdint.h
+-
+stdbool.h
+-
+
+/home/yoel/eusolver/thirdparty/libeusolver/tests/BitSetTests.cpp
+../src/BitSet.hpp
+/home/yoel/eusolver/thirdparty/libeusolver/src/BitSet.hpp
+assert.h
+-
+vector
+-
+

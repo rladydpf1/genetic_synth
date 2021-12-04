@@ -1,0 +1,6 @@
+/home/yoel/eusolver/thirdparty/libeusolver/build/CMakeFiles/eusolver_all_tests.dir
+/home/yoel/eusolver/thirdparty/libeusolver/build/CMakeFiles/edit_cache.dir
+/home/yoel/eusolver/thirdparty/libeusolver/build/CMakeFiles/eusolver_bitset_tests.dir
+/home/yoel/eusolver/thirdparty/libeusolver/build/CMakeFiles/eusolver.dir
+/home/yoel/eusolver/thirdparty/libeusolver/build/CMakeFiles/rebuild_cache.dir
+/home/yoel/eusolver/thirdparty/libeusolver/build/CMakeFiles/eusolver_python.dir
