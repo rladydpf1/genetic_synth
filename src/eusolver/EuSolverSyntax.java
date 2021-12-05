@@ -9,6 +9,7 @@ public class EuSolverSyntax {
     private String syntax;
     private String returnType;
     private ArrayList<String> paNames;
+    private HashSet<String> usedGrammars = new HashSet<>();
 
     private final List<String> operators_Int = Arrays.asList("+", "-", "*", "/", "ite");
     private final List<String> operators_Bool = Arrays.asList("<", "<=", ">", ">=", "or", "and", "=");
@@ -25,6 +26,8 @@ public class EuSolverSyntax {
     }
 
     public void setGrammars(HashSet<String> grammars) {
+        grammars.add("ite");
+        // grammars.add("=");
         HashSet<String> constants = new HashSet<>();
         HashSet<String> parameters = new HashSet<>();
         HashSet<String> operatorInt = new HashSet<>();
@@ -46,6 +49,8 @@ public class EuSolverSyntax {
                 }
             }
         }
+        usedGrammars.addAll(constants); usedGrammars.addAll(parameters); 
+        usedGrammars.addAll(operatorInt); usedGrammars.addAll(operatorBool);
         String syntax = getSyntax();
         syntax += "((Start Int (\n\t";
         for (String constant : constants) {
@@ -82,7 +87,6 @@ public class EuSolverSyntax {
         else {
             syntax += ")) \n";
         }
-
         setSyntax(syntax);
     }
 
@@ -110,7 +114,6 @@ public class EuSolverSyntax {
             grammars.add(constant.toString());
             const_num--;
         }
-        grammars.add("ite");
         setGrammars(grammars);
     }
 
@@ -125,6 +128,9 @@ public class EuSolverSyntax {
     }
     public String getReturnType() {
         return returnType;
+    }
+    public HashSet<String> getUsedGrammars() {
+        return usedGrammars;
     }
     
 }

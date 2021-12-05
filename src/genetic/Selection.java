@@ -13,7 +13,7 @@ public class Selection {
         HashSet<Integer> sublist = new HashSet<>();
         Random random = new Random();
         int size = ranking.size();
-        int k = 10;
+        int k = 5;
         if (size <= k) {
             k = size - 1;
         }

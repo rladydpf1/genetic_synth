@@ -74,7 +74,7 @@ public class Fitness {
         if (ranking.isEmpty()) {
             return;
         }
-        for (int i = ranking.size(); i > size; i--) {
+        for (int i = ranking.size()-1; i > size; i--) {
             fitnessValues.remove(ranking.get(i));
             ranking.remove(i);
         }

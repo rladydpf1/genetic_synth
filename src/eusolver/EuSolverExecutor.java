@@ -14,9 +14,11 @@ public class EuSolverExecutor {
     private final static String eusolver = "./eusolver/eusolver";
     private File specFile;
     private HashSet<LogData> data;
+    private HashSet<String> grammar;
 
     public EuSolverExecutor(String filePath, EuSolverSyntax syntax, HashSet<LogData> data) {
         this.data = data;
+        this.grammar = syntax.getUsedGrammars();
         specFile = new File("./eusolver/" + filePath);
         String spec = syntax.getSyntax() + "\n";
         for (LogData log : data) {
@@ -77,6 +79,10 @@ public class EuSolverExecutor {
 
     public HashSet<LogData> getData() {
         return data;
+    }
+
+    public HashSet<String> getGrammar() {
+        return grammar;
     }
     
 }

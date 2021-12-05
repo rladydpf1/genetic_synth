@@ -1,6 +1,7 @@
 package synth;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Stack;
@@ -14,6 +15,7 @@ public class SynthCode {
     private Float time;
     private ArrayList<ParseTree> conditions = new ArrayList<>();
     private HashSet<String> usedGrammars = new HashSet<>();
+    private HashMap<String, Integer> opCounter = new HashMap<>();
     private final List<String> unary = Arrays.asList("not", "!");
     private final List<String> binary = Arrays.asList("+", "-", "*", "/", "div", "%", "<", "<=", ">", ">=", "=", "or", "and", "||", "&&", "==");
     private final List<String> ternary = Arrays.asList("ite", "if");
@@ -111,6 +113,11 @@ public class SynthCode {
             }
             else if (binary.contains(token)) {
                 usedGrammars.add(token);
+                if (opCounter.containsKey(token)) {
+                    opCounter.put(token, opCounter.get(token) + 1);
+                }
+                else opCounter.put(token, 1);
+
                 if (token.equals("or")) token = "||";
                 if (token.equals("and")) token = "&&";
                 if (token.equals("=")) token = "==";
@@ -127,11 +134,10 @@ public class SynthCode {
                 }
                 if (node.getFirst().getValue() != null && node.getSecond().getValue() != null) {
                     switch (node.getOperator()) {
-                        case "+": node.setValue(node.getFirst().getValue() + node.getSecond().getValue()); size -= 2; break;
-                        case "-": node.setValue(node.getFirst().getValue() - node.getSecond().getValue()); size -= 2; break;
-                        case "*": node.setValue(node.getFirst().getValue() * node.getSecond().getValue()); size -= 2; break;
-                        case "/": node.setValue(node.getFirst().getValue() / node.getSecond().getValue()); size -= 2; break;
-                        case "%": node.setValue(node.getFirst().getValue() % node.getSecond().getValue()); size -= 2; break;
+                        case "+": node.setValue(node.getFirst().getValue() + node.getSecond().getValue()); size -= 2; opCounter.put("+", opCounter.get("+") - 1); break;
+                        case "-": node.setValue(node.getFirst().getValue() - node.getSecond().getValue()); size -= 2; opCounter.put("-", opCounter.get("-") - 1); break;
+                        case "*": node.setValue(node.getFirst().getValue() * node.getSecond().getValue()); size -= 2; opCounter.put("*", opCounter.get("*") - 1); break;
+                        case "/": node.setValue(node.getFirst().getValue() / node.getSecond().getValue()); size -= 2; opCounter.put("/", opCounter.get("/") - 1); break;
                     }
                     node.setOperator(node.getValue().toString());
                     node.setFirst(null); node.setSecond(null);
@@ -226,6 +232,9 @@ public class SynthCode {
     }
 
     public HashSet<String> getUsedGrammars() {
+        for (String op: opCounter.keySet()) {
+            if (opCounter.get(op) <= 0) usedGrammars.remove(op);
+        }
         return usedGrammars;
     }
 }
