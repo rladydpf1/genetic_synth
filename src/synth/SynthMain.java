@@ -65,8 +65,8 @@ public class SynthMain {
         do {
             // 2. evaluate all synthesized programs. (fitness)
             fitness.evaluate(pop, specifications, timeout);
-            fitness.cutBySize(pop_size);
             ranking = fitness.getRanking();
+            fitness.cutBySize(pop_size);
             fitnessValues = fitness.getFitnessValues();
 
             // 3. check whether it is updated.
