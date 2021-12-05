@@ -2,12 +2,16 @@ package genetic;
 
 import java.util.HashMap;
 import java.util.HashSet;
+
+import eusolver.EuSolverExecutor;
+
 import java.util.ArrayList;
 
 import logdata.LogData;
 import synth.SynthCode;
 import synth.SynthEvaluator;
 import synth.SynthNode;
+import util.MultiTasks;
 
 public class Fitness {
     HashSet<LogData> testSet;
@@ -23,20 +27,30 @@ public class Fitness {
         ranking = new ArrayList<>();
     }
 
-    public Float evaluate(SynthNode individual) {
-        float accuracy = -1F;
+    public void evaluate(ArrayList<SynthNode> pop, ArrayList<EuSolverExecutor> specifications, int timeout) {
+        MultiTasks.synthesizeConcurrently(pop, funName, timeout, specifications);
         try {
-            SynthCode code = individual.getCode();
-            if (code == null) {
-                return -1F;
-            }
-            SynthEvaluator evaluator = new SynthEvaluator("evaluator_" + funName + "_" + individual.getId() + ".c", definition);
-            accuracy = evaluator.getAccuracy(code.getCCode(), testSet, null);
+            Process process = Runtime.getRuntime().exec("killall python3");
+            process.waitFor();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        catch(Exception e) { return -1F; }
 
-        insert(individual.getId(), accuracy);
-        return accuracy;
+        for (SynthNode individual : pop) {
+            if (fitnessValues.containsKey(individual.getId())) continue;
+            float accuracy = -1F;
+            try {
+                SynthCode code = individual.getCode();
+                if (code == null) {
+                    continue;
+                }
+                SynthEvaluator evaluator = new SynthEvaluator("evaluator_" + funName + "_" + individual.getId() + ".c", definition);
+                accuracy = evaluator.getAccuracy(code.getCCode(), testSet, null);
+            }
+            catch(Exception e) { continue; }
+    
+            insert(individual.getId(), accuracy);
+        }
     }
 
     private void insert(Integer key, Float value) {
@@ -54,6 +68,16 @@ public class Fitness {
             }
         }
         ranking.add(key);
+    }
+
+    public void cutBySize(int size) {
+        if (ranking.isEmpty()) {
+            return;
+        }
+        for (int i = ranking.size(); i > size; i--) {
+            fitnessValues.remove(ranking.get(i));
+            ranking.remove(i);
+        }
     }
 
     public ArrayList<Integer> getRanking() {

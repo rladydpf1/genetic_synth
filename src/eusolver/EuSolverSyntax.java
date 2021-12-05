@@ -10,7 +10,7 @@ public class EuSolverSyntax {
     private String returnType;
     private ArrayList<String> paNames;
 
-    private final List<String> operators_Int = Arrays.asList("+", "-", "*", "/", "ite");
+    private final List<String> operators_Int = Arrays.asList("+", "-", "*", "/");
     private final List<String> operators_Bool = Arrays.asList("<", "<=", ">", ">=", "or", "and", "=");
 
     public EuSolverSyntax(String funName, ArrayList<String> paNames, String returnType) {
@@ -110,6 +110,7 @@ public class EuSolverSyntax {
             grammars.add(constant.toString());
             const_num--;
         }
+        grammars.add("ite");
         setGrammars(grammars);
     }
 

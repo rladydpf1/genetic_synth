@@ -13,11 +13,17 @@ public class MultiTasks {
             ExecutorService threadPool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
             for (int i = 0; i < tasks.size(); i++) {
                 SynthNode task = tasks.get(i);
+                if (task.isSynthesized()) continue;
                 EuSolverExecutor synthesizer = specifications.get(i);
                 threadPool.submit(() -> {
                     SynthCode function = synthesizer.synthesize(timeout, task.getId().toString());
-                    task.setCode(function);
-                    task.setUsedData(synthesizer.getData());
+                    if (function != null) {
+                        task.setCCode(function.getCCode());
+                        task.setCode(function);
+                        task.setUsedData(synthesizer.getData());
+                        task.setUsedGraamrs(function.getUsedGrammars());
+                        task.setSynthesized();
+                    }
                 });
                 Thread.sleep(10);
             }

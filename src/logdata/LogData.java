@@ -2,13 +2,12 @@ package logdata;
 
 import util.Input;
 
-public class LogData implements Comparable<LogData> {
+public class LogData {
     private String funName = "function";
     private Input input;
     private Object output = null;
     private String constraint = null;
     private String call = null;
-    private Integer score = 0;
 
     public LogData(String log) {
         String[] in_outputs = log.split("=");
@@ -77,19 +76,5 @@ public class LogData implements Comparable<LogData> {
     @Override
     public boolean equals(Object obj){
         return input.equals(((LogData)obj).getInput());
-    }
-
-    public void addScore(Integer point) {
-        score += point;
-    }
-
-    public Integer getScore() {
-        return score;
-    }
-
-    @Override
-    public int compareTo(LogData o) {
-        // return o.getScore() - this.getScore();
-        return this.getScore() - o.getScore();
     }
 }
