@@ -1,6 +1,7 @@
 package synth;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Stack;
 
@@ -11,8 +12,8 @@ public class SynthCode {
     private String cCode = null;
     private Integer size;
     private Float time;
-    private boolean conditionMode = false;
     private ArrayList<ParseTree> conditions = new ArrayList<>();
+    private HashSet<String> usedGrammars = new HashSet<>();
     private final List<String> unary = Arrays.asList("not", "!");
     private final List<String> binary = Arrays.asList("+", "-", "*", "/", "div", "%", "<", "<=", ">", ">=", "=", "or", "and", "||", "&&", "==");
     private final List<String> ternary = Arrays.asList("ite", "if");
@@ -21,14 +22,8 @@ public class SynthCode {
         String endStr = ")) ";
         int end = code.indexOf(endStr);
         int retype = -1, code_s = 0;
-        if ((retype = code.indexOf("Bool ", end)) != -1) {
-            conditionMode = true;
-            code_s = retype + "Bool ".length();
-        }
-        else {
-            retype = code.indexOf("Int ", end);
-            code_s = retype + "Int ".length();
-        }
+        retype = code.indexOf("Int ", end);
+        code_s = retype + "Int ".length();
         code = code.substring(code_s, code.length()-1);
         code = code.replaceAll("\\(", "");
         code = code.replaceAll("\\)", "");
@@ -45,20 +40,10 @@ public class SynthCode {
         time = Float.parseFloat(stat.substring(start, end));
     }
 
-    // multi-output code merging
-    public SynthCode(String[] codes) {
-        cCode = "";
-        for (int i = 0; i < codes.length; i++) {
-            String output = "out_" + i + "_=";
-            cCode += codes[i].replaceAll("return", output) + "\n";
-        }
-    }
-
     private String convertCCode() {
         cCode = "";
         ParseTree root = makeParseTree();
         traverse(root);
-        if (conditionMode) return cCode;
         if (!cCode.contains("if")) return "return " + cCode + ";";   
         String[] tokens = cCode.split(" ");
         String res = "";
@@ -125,6 +110,7 @@ public class SynthCode {
                 ParseTreeStack.push(node);
             }
             else if (binary.contains(token)) {
+                usedGrammars.add(token);
                 if (token.equals("or")) token = "||";
                 if (token.equals("and")) token = "&&";
                 if (token.equals("=")) token = "==";
@@ -215,6 +201,7 @@ public class SynthCode {
             cCode += ")";
         }
         else {
+            usedGrammars.add(data);
             if (data.charAt(0) != '-') cCode += data;
             else cCode += "(" + data + ")";
         }
@@ -236,5 +223,9 @@ public class SynthCode {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public HashSet<String> getUsedGrammars() {
+        return usedGrammars;
     }
 }

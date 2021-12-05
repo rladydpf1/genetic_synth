@@ -14,8 +14,6 @@ public class SynthEvaluator {
     public SynthEvaluator(String fileName, String definition) {
         this.definition = definition;
         this.fileName = fileName;
-        eval.put(true, new HashSet<>());
-        eval.put(false, new HashSet<>());
     }
 
     public Float getAccuracy(String cCode, HashSet<LogData> testSet, HashSet<LogData> selected) {
@@ -40,12 +38,8 @@ public class SynthEvaluator {
             for (int i = 0; i < tests.size(); i++) {
                 if (tests.get(i).getOutput().toString().equals(res[i])) {
                     hit++;
-                    tests.get(i).addScore(1);
-                    eval.get(true).add(tests.get(i));
                 }
                 else {
-                    tests.get(i).addScore(-1);
-                    eval.get(false).add(tests.get(i));
                 }
             }
         return (float) hit * 100F / tests.size();
