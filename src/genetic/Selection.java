@@ -7,14 +7,16 @@ import java.util.Random;
 import synth.SynthNode;
 
 public class Selection {
-
-    final static int k = 10;
     
     public static ArrayList<SynthNode> tournamentSelect(ArrayList<Integer> ranking, ArrayList<SynthNode> pop) {
         ArrayList<SynthNode> parents = new ArrayList<>();
         HashSet<Integer> sublist = new HashSet<>();
         Random random = new Random();
         int size = ranking.size();
+        int k = 10;
+        if (size <= k) {
+            k = size - 1;
+        }
         while (sublist.size() < k) {
             sublist.add(random.nextInt(size));
         }
@@ -30,7 +32,7 @@ public class Selection {
         Integer parent2 = ranking.size();
         for (Integer rank : sublist) {
             if (rank == parent1) continue;
-            if (parent1 > rank) parent1 = rank;
+            if (parent2 > rank) parent2 = rank;
         }
 
         parents.add(pop.get(ranking.get(parent1)));
