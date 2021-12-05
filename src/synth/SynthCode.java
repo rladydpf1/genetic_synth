@@ -4,13 +4,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
-import util.Condition;
 import util.ParseTree;
 
 public class SynthCode {
     private String code;
     private String cCode = null;
-    private Integer size, tempSize;
+    private Integer size;
     private Float time;
     private boolean conditionMode = false;
     private ArrayList<ParseTree> conditions = new ArrayList<>();
@@ -237,39 +236,5 @@ public class SynthCode {
         } catch (Exception e) {
             return false;
         }
-    }
-
-    public ArrayList<Condition> getConditions() {
-        ArrayList<Condition> condList = new ArrayList<>();
-        for (ParseTree condition : conditions) {
-            tempSize = 0;
-            Condition cond = new Condition(getCondition(condition, "", 1));
-            cond.setSize(tempSize);
-            condList.add(cond);
-        }
-        return condList;
-    }
-
-    private String getCondition(ParseTree condition, String res, int size) {
-        if (condition == null) return res + "";
-        String data = condition.getOperator();
-        if (binary.contains(data)) {
-            res += "(";
-            res = getCondition(condition.getFirst(), res, ++size);
-            res += data;
-            res = getCondition(condition.getSecond(), res, ++size);
-            res += ")";
-        }
-        else if (unary.contains(data)){
-            res += "(" + data;
-            res = getCondition(condition.getFirst(), res, ++size);
-            res += ")";
-        }
-        else {
-            if (data.charAt(0) != '-') res += data;
-            else res += "(" + data + ")";
-        }
-        tempSize = size;
-        return res;
     }
 }

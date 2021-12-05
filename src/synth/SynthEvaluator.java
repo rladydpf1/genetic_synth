@@ -18,7 +18,7 @@ public class SynthEvaluator {
         eval.put(false, new HashSet<>());
     }
 
-    public Float getAccuracy(String cCode, HashSet<LogData> testSet, HashSet<LogData> selected, int outputNum) {
+    public Float getAccuracy(String cCode, HashSet<LogData> testSet, HashSet<LogData> selected) {
         ArrayList<LogData> tests = new ArrayList<>(testSet);
         
         if (selected != null) tests.removeAll(selected);

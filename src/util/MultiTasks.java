@@ -1,31 +1,23 @@
 package util;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.concurrent.*;
 
 import synth.SynthCode;
 import synth.SynthNode;
-import logdata.LogDataAnalyzer;
-import logdata.LogData;
 import eusolver.EuSolverExecutor;
 
 public class MultiTasks {
     
-    public static void synthesizeConcurrently(ArrayList<SynthNode> tasks, LogDataAnalyzer analyzer, int timeout, ArrayList<HashSet<LogData>> constraintsList) {
+    public static void synthesizeConcurrently(ArrayList<SynthNode> tasks, String funName, int timeout, ArrayList<EuSolverExecutor> specifications) {
         try {
-            String funName = analyzer.getFunctionName();
-            Syntax syntax = analyzer.getEuSolverSyntax();
             ExecutorService threadPool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
             for (int i = 0; i < tasks.size(); i++) {
                 SynthNode task = tasks.get(i);
-                HashSet<LogData> constraints = constraintsList.get(i);
+                EuSolverExecutor synthesizer = specifications.get(i);
                 threadPool.submit(() -> {
-                    EuSolverExecutor synthesizer = new EuSolverExecutor(funName + "_" + task.getId() + ".sl");
-                    synthesizer.generate(syntax, constraints);
                     SynthCode function = synthesizer.synthesize(timeout, task.getId().toString());
                     task.setCode(function);
-                    task.setUsedData(constraints);
-                    task.setSatisfied(true);
+                    task.setUsedData(synthesizer.getData());
                 });
                 Thread.sleep(10);
             }

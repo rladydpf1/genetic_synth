@@ -9,17 +9,15 @@ import java.util.concurrent.TimeUnit;
 
 import logdata.LogData;
 import synth.SynthCode;
-import util.Syntax;
 
 public class EuSolverExecutor {
     private final static String eusolver = "./eusolver/eusolver";
     private File specFile;
+    private HashSet<LogData> data;
 
-    public EuSolverExecutor(String filePath) {
+    public EuSolverExecutor(String filePath, EuSolverSyntax syntax, HashSet<LogData> data) {
+        this.data = data;
         specFile = new File("./eusolver/" + filePath);
-    }
-
-    public void generate(Syntax syntax, HashSet<LogData> data) {
         String spec = syntax.getSyntax() + "\n";
         for (LogData log : data) {
             spec += log.getConstraintFormat() + "\n";
@@ -75,6 +73,10 @@ public class EuSolverExecutor {
 
     public File getSpecFile() {
         return specFile;
+    }
+
+    public HashSet<LogData> getData() {
+        return data;
     }
     
 }
