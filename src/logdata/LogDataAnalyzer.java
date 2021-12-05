@@ -5,16 +5,12 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import eusolver.EuSolverSyntax;
-import util.Syntax;
-
 public class LogDataAnalyzer {
     private HashSet<LogData> testSet;
     private HashSet<LogData> synthSet;
     private String funName;
     private ArrayList<String> paNames;
     private String definition;
-    private Syntax eSyntax;
     
     public LogDataAnalyzer(File logFile, File testFile) {
         testSet = new HashSet<>();
@@ -26,7 +22,6 @@ public class LogDataAnalyzer {
             while((log_s = reader.readLine()) != null) {
                 if (log_s.length() == 0) continue;
                 LogData log = new LogData(log_s);
-                // if (log.getInput().getValues()[0] != 0) continue;
                 synthSet.add(log);
             }
             reader.close();
@@ -35,10 +30,6 @@ public class LogDataAnalyzer {
             while((log_s = reader.readLine()) != null) {
                 if (log_s.length() == 0) continue;
                 LogData log = new LogData(log_s);
-                // if (testSet.contains(log)) {
-                //     System.out.println(log.getConstraintFormat());
-                // }
-                // if (log.getInput().getValues()[0] != 0) continue;
                 testSet.add(log);
             }
             reader.close();
@@ -87,10 +78,10 @@ public class LogDataAnalyzer {
         return paNames;
     }
 
-    public Syntax getEuSolverSyntax() {
-        if (eSyntax != null) return eSyntax;
-        eSyntax = new EuSolverSyntax(funName, paNames, "Int");
-        eSyntax.setSyntacticBasic();
-        return eSyntax;
-    }
+    // public Syntax getEuSolverSyntax() {
+    //     if (eSyntax != null) return eSyntax;
+    //     eSyntax = new EuSolverSyntax(funName, paNames, "Int");
+    //     eSyntax.setSyntacticBasic();
+    //     return eSyntax;
+    // }
 }

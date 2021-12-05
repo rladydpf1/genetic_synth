@@ -2,26 +2,17 @@ package synth;
 import java.io.File;
 import java.util.*;
 
+import genetic.Fitness;
+import genetic.InitPopulation;
 import logdata.LogData;
 import logdata.LogDataAnalyzer;
-import logdata.LogDataSelector;
-import util.MultiTasks;
 
 public class SynthMain {
     public static void main(String[] args) {
-        args = new String[3];
-        // containsDuplicate // 1500, 800
-        // containsNearbyDuplicate // 3000, 400
-        // jumpGame // 9000, 400
-        // busyStudent  // 2500, 300
-        // numFriendRequests // 100 > 1h
-        // removeElement // 8500, 800
-        // majorityElement //x, 400 > 1h
-        // missingNumber // x, 300 > 1h
-        
-        args[0] = "test/getbiggestrect.log";
-        args[1] = "test/getbiggestrect.test";
-        args[2] = "60"; 
+        // args = new String[3];
+        // args[0] = "example/getbiggestrect.log";
+        // args[1] = "example/getbiggestrect.test";
+        // args[2] = "60"; 
         if (args.length != 3) {
             System.out.println("usage: java SynthMain [log_file] [test_file] [timeout_per_synthesis]");
             return;
@@ -46,69 +37,59 @@ public class SynthMain {
         HashSet<LogData> testSet = logDataAnalyzer.getTestData();
         String funName = logDataAnalyzer.getFunctionName();
         String definition = logDataAnalyzer.getDefinition();   
+        ArrayList<String> panames = logDataAnalyzer.getPaNames();
 
-        int current = 0;
-        SynthNode root = new SynthNode(synthSet);
-        root.setId(current);
-
-        // 1. syntheisze programs with every 10/100/1000 constriants.
-        ArrayList<SynthNode> initSynths = new ArrayList<>();
-        ArrayList<HashSet<LogData>> selecteds = new ArrayList<>();
-        LogDataSelector selector = new LogDataSelector(synthSet);
-        int init = 1000, max = synthSet.size(), factor = 100, id = 0;
-        if (max > 100) max = 10;
-        for (int j = 0; j < 10; j++) {
-            init = 10;
-            selecteds.add(selector.selectRandomly(init));
-            SynthNode node = new SynthNode(synthSet);
-            node.setId(id++);
-            initSynths.add(node);
-        }
-        MultiTasks.synthesizeConcurrently(initSynths, logDataAnalyzer, timeout, selecteds);
-        try {
-            Process process = Runtime.getRuntime().exec("killall python3");
-            process.waitFor();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // 2. evaluate all synthesized programs, and get the max size of constriants and the program which got the best accuarcy.
-        SynthCode bestCode = null;
-        int max_const_size = 0, best_const_size = 0;
-        float bestAccuracy = -2F;
         System.out.println("function name: " + funName);
-        for (int i = 0; i < initSynths.size(); i++) {
-            try {
-                SynthNode node = initSynths.get(i);
-                System.out.print("constraints: " + node.getUsedConstraints().size() + ", ");
-                SynthCode code = node.getCode();
-                if (code == null) {
-                    System.out.println("synthesis timeout");
-                    continue;
-                }
-                max_const_size = node.getUsedConstraints().size();
-                SynthEvaluator evaluator = new SynthEvaluator("evaluator_" + funName + "_" + node.getId() + ".c", definition);
-                float accuracy = evaluator.getAccuracy(code.getCCode(), testSet, null, 1);
-                System.out.println("accuracy: " + accuracy + "%, size: " + node.getCode().getSize() + ", time: " + node.getCode().getTime());
-                // System.out.println(code.getCCode() + "\n");
-                if (accuracy > bestAccuracy) {
-                    bestAccuracy = accuracy;
-                    bestCode = code;
-                    best_const_size = node.getUsedConstraints().size();
-                }
-                else if (accuracy == bestAccuracy) {
-                    if (bestCode.getSize() > code.getSize()) {
-                        bestCode = code;
-                    }
-                }
-            } catch (Exception e) {
-                continue;
+        long beforeTime = System.currentTimeMillis();
+
+        // 1. initial population
+        InitPopulation init = new InitPopulation(synthSet, panames, funName, timeout);
+        ArrayList<SynthNode> pop = init.genPopulations();
+        final int pop_size = pop.size();
+
+        ArrayList<Integer> ranking = new ArrayList<>();
+        HashMap<Integer, Float> fitnessValues = new HashMap<>();
+        Float bestSoFar = -1F;
+        SynthNode bestIndividual = null;
+        int chance = 2;
+        
+        while (bestSoFar < 100F) {
+            // 2. evaluate all synthesized programs.
+            Fitness fitness = new Fitness(testSet, definition, funName);
+            for (int i = 0; i < pop.size(); i++) {
+                fitness.evaluate(pop.get(i));
             }
+            ranking = fitness.getRanking();
+            fitnessValues = fitness.getFitnessValues();
+
+            // 3. check whether it is updated.
+            boolean isUpdated = false;
+            Float localBest = -1F;
+            if (!ranking.isEmpty()) {
+                localBest = fitnessValues.get(ranking.get(0));
+            }
+            if (bestSoFar < localBest) {
+                bestSoFar = localBest;
+                bestIndividual = pop.get(ranking.get(0));
+                isUpdated = true;
+                chance = 2;
+            }
+            if (isUpdated) {
+                System.out.println("==================================");
+                System.out.println(String.format("Time: %.2f", (System.currentTimeMillis() - beforeTime) / 1000F));
+                System.out.println("Best indivisual: " + bestIndividual.getCode().getCCode());
+                System.out.println(String.format("Best-so-far: %.1f", bestSoFar));
+            } else chance--;
+            if (chance == 0) {
+                System.out.println("not improved.");
+                break;
+            }
+
             
         }
-        System.out.println(" best code: " + bestCode.getCCode());
-        System.out.println(" best accuracy: " + bestAccuracy + "%");
-        System.out.println(" best size: " + bestCode.getSize());
-        System.out.println(" best time: " + bestCode.getTime());
+        
+
+        
+        
     }
 }
