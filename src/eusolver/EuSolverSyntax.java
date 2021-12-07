@@ -110,7 +110,7 @@ public class EuSolverSyntax {
         }
         int const_num = random.nextInt(10);
         while(const_num > 0) {
-            Integer constant = random.nextInt(100) - 1;
+            Integer constant = random.nextInt(10) - 1;
             grammars.add(constant.toString());
             const_num--;
         }

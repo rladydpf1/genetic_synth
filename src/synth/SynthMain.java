@@ -12,7 +12,7 @@ import logdata.LogDataAnalyzer;
 import eusolver.EuSolverExecutor;
 
 public class SynthMain {
-    final static int pop_size = 100;
+    final static int pop_size = Runtime.getRuntime().availableProcessors() * 2;
     final static int init_example_num = 10;
 
     public static void main(String[] args) {
@@ -70,8 +70,8 @@ public class SynthMain {
         do {
             // 2. evaluate all synthesized programs. (fitness)
             fitness.evaluate(pop, specifications, timeout);
+            pop = fitness.cutBySize(pop_size);
             ranking = fitness.getRanking();
-            fitness.cutBySize(pop_size);
             fitnessValues = fitness.getFitnessValues();
 
             // 3. check whether it is updated.
@@ -104,7 +104,7 @@ public class SynthMain {
             ArrayList<SynthNode> parents = new ArrayList<>();
             Crossover crossover = new Crossover(funName, paNames);
 
-            for (int i = 0; i < pop.size()/4; i++) {
+            for (int i = 0; i < ranking.size()/4; i++) {
                 parents = Selection.tournamentSelect(ranking, pop);
                 ArrayList<EuSolverExecutor> specs = crossover.crossover(parents, last_id);
                 SynthNode child1 = new SynthNode();
@@ -116,10 +116,9 @@ public class SynthMain {
             }
 
             // 5. Mutation.
-            int new_size = newPop.size();
             Mutation mutation = new Mutation(funName, paNames, synthSet);
-            for (int i = 0; i < new_size; i++) {
-                EuSolverExecutor mutatedSpec = mutation.mutate(newSpec.get(i), last_id);
+            for (int i = 0; i < ranking.size()/2; i++) {
+                EuSolverExecutor mutatedSpec = mutation.mutate(specifications.get(ranking.get(i)), last_id);
                 if (mutatedSpec == null) continue;
                 SynthNode mutant = new SynthNode();
                 mutant.setId(last_id++);

@@ -18,6 +18,7 @@ public class Fitness {
     HashMap<Integer, Float> fitnessValues;
     ArrayList<Integer> ranking;
     String definition, funName;
+    ArrayList<SynthNode> pop;
 
     public Fitness(HashSet<LogData> testSet, String definition, String funName) {
         this.testSet = testSet;
@@ -28,6 +29,7 @@ public class Fitness {
     }
 
     public void evaluate(ArrayList<SynthNode> pop, ArrayList<EuSolverExecutor> specifications, int timeout) {
+        this.pop = pop;
         MultiTasks.synthesizeConcurrently(pop, funName, timeout, specifications);
         try {
             Process process = Runtime.getRuntime().exec("killall python3");
@@ -70,14 +72,15 @@ public class Fitness {
         ranking.add(key);
     }
 
-    public void cutBySize(int size) {
+    public ArrayList<SynthNode> cutBySize(int size) {
         if (ranking.isEmpty()) {
-            return;
+            return null;
         }
         for (int i = ranking.size()-1; i > size; i--) {
             fitnessValues.remove(ranking.get(i));
             ranking.remove(i);
         }
+        return pop;
     }
 
     public ArrayList<Integer> getRanking() {
