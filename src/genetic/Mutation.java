@@ -45,47 +45,40 @@ public class Mutation {
                     flag = true;
                 }
             }
-            for (String pa : paNames) {
-                if (random.nextInt(2) == 0) {
-                    grammar.add(pa);
-                    flag = true;
-                }
-            }
             if (random.nextInt(8) == 0) {
-                Integer constant = random.nextInt(10)-1;
+                Integer constant = random.nextInt(100)-1;
                 grammar.add(constant.toString());
                 flag = true;
             }
         }
 
-        // // grammar deletion
-        // HashSet<String> removeList = new HashSet<>();
-        // if (random.nextInt(4) == 0) {
-        //     for (String op : grammar) {
-        //         if (random.nextInt(8) == 0) {
-        //             removeList.add(op);
-        //             flag = true;
-        //         }
-        //     }
-        //     grammar.removeAll(removeList);
-        // }
+        // grammar deletion
+        HashSet<String> removeList = new HashSet<>();
+        if (random.nextInt(4) == 0) {
+            for (String op : grammar) {
+                if (random.nextInt(8) == 0) {
+                    removeList.add(op);
+                    flag = true;
+                }
+            }
+            grammar.removeAll(removeList);
+        }
 
         // log data addition
         if (random.nextInt(4) == 0) {
             LogDataSelector selector = new LogDataSelector(synthSet);
-            if (data.size() >= 10) data.addAll(selector.selectRandomly(random.nextInt(data.size()/2)));
-            else data.addAll(selector.selectRandomly(random.nextInt(10)));
+            data.addAll(selector.selectRandomly(random.nextInt(data.size()/2)));
             flag = true;
         }
         
-        // // log data deletion
-        // if (random.nextInt(4) == 0) {
-        //     LogDataSelector selector = new LogDataSelector(data);
-        //     if (data.size() >= 10) {
-        //         data.removeAll(selector.selectRandomly(random.nextInt(data.size()/2)));
-        //         flag = true;
-        //     }
-        // }
+        // log data deletion
+        if (random.nextInt(4) == 0) {
+            LogDataSelector selector = new LogDataSelector(data);
+            if (data.size() >= 10) {
+                data.removeAll(selector.selectRandomly(random.nextInt(data.size()/2)));
+                flag = true;
+            }
+        }
         
         if (!flag) return null;
 

@@ -93,7 +93,7 @@ class DivFunction(InterpretedFunctionBase):
             if b != 0:
                 return a // b
             else:
-                raise basetypes.PartialFunctionError
+                return 0
         self.eval_children = eval_c
         self.smt_function = lambda a, b : a / b
 

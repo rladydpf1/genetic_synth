@@ -11,7 +11,7 @@ public class EuSolverSyntax {
     private ArrayList<String> paNames;
     private HashSet<String> usedGrammars = new HashSet<>();
 
-    private final List<String> operators_Int = Arrays.asList("+", "-", "*", "/", "ite");
+    private final List<String> operators_Int = Arrays.asList("+", "-", "*", "ite", "div");
     private final List<String> operators_Bool = Arrays.asList("<", "<=", ">", ">=", "or", "and", "=");
 
     public EuSolverSyntax(String funName, ArrayList<String> paNames, String returnType) {
@@ -26,8 +26,8 @@ public class EuSolverSyntax {
     }
 
     public void setGrammars(HashSet<String> grammars) {
-        grammars.add("ite");
-        // grammars.add("=");
+        grammars.add("ite"); grammars.add("="); grammars.add("1");
+        
         HashSet<String> constants = new HashSet<>();
         HashSet<String> parameters = new HashSet<>();
         HashSet<String> operatorInt = new HashSet<>();
@@ -104,9 +104,7 @@ public class EuSolverSyntax {
             } 
         }
         for (String pa :  paNames) {
-            if (random.nextInt(2) == 0) {
-                grammars.add(pa);
-            } 
+            grammars.add(pa);
         }
         int const_num = random.nextInt(10);
         while(const_num > 0) {

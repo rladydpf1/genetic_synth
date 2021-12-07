@@ -99,26 +99,25 @@ public class SynthMain {
             }
 
             // 4. Crossover.
-            ArrayList<SynthNode> newPop = new ArrayList<>(pop);
-            ArrayList<EuSolverExecutor> newSpec = new ArrayList<>(specifications);
+            ArrayList<SynthNode> newPop = new ArrayList<>();
+            ArrayList<EuSolverExecutor> newSpec = new ArrayList<>();
             ArrayList<SynthNode> parents = new ArrayList<>();
             Crossover crossover = new Crossover(funName, paNames);
 
-            for (int i = 0; i < ranking.size()/4; i++) {
+            for (int i = 0; i < ranking.size()/2; i++) {
                 parents = Selection.tournamentSelect(ranking, pop);
-                ArrayList<EuSolverExecutor> specs = crossover.crossover(parents, last_id);
-                SynthNode child1 = new SynthNode();
-                SynthNode child2 = new SynthNode();
-                child1.setId(last_id++);
-                child2.setId(last_id++);
-                newPop.add(child1); newPop.add(child2);
-                newSpec.add(specs.get(0)); newSpec.add(specs.get(1));
+                EuSolverExecutor CrossedSpec = crossover.crossover(parents, last_id);
+                SynthNode child = new SynthNode();
+                child.setId(last_id++);
+                newPop.add(child);
+                newSpec.add(CrossedSpec);
             }
 
             // 5. Mutation.
             Mutation mutation = new Mutation(funName, paNames, synthSet);
-            for (int i = 0; i < ranking.size()/2; i++) {
-                EuSolverExecutor mutatedSpec = mutation.mutate(specifications.get(ranking.get(i)), last_id);
+            int new_pop_size = newPop.size();
+            for (int i = 0; i < new_pop_size; i++) {
+                EuSolverExecutor mutatedSpec = mutation.mutate(newSpec.get(i), last_id);
                 if (mutatedSpec == null) continue;
                 SynthNode mutant = new SynthNode();
                 mutant.setId(last_id++);
@@ -127,8 +126,8 @@ public class SynthMain {
             }
 
 
-            pop = newPop;
-            specifications = newSpec;
+            pop.addAll(newPop);
+            specifications.addAll(newSpec);
 
         } while(true);
     }
