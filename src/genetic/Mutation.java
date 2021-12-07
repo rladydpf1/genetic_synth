@@ -46,10 +46,15 @@ public class Mutation {
                 }
             }
             for (String pa : paNames) {
-                if (random.nextInt(4) == 0) {
+                if (random.nextInt(2) == 0) {
                     grammar.add(pa);
-                    
+                    flag = true;
                 }
+            }
+            if (random.nextInt(8) == 0) {
+                Integer constant = random.nextInt(100)-1;
+                grammar.add(constant.toString());
+                flag = true;
             }
         }
 
@@ -57,7 +62,7 @@ public class Mutation {
         HashSet<String> removeList = new HashSet<>();
         if (random.nextInt(4) == 0) {
             for (String op : grammar) {
-                if (random.nextInt(4) == 0) {
+                if (random.nextInt(8) == 0) {
                     removeList.add(op);
                     flag = true;
                 }

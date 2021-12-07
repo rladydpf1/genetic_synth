@@ -12,14 +12,10 @@ import logdata.LogDataAnalyzer;
 import eusolver.EuSolverExecutor;
 
 public class SynthMain {
-    final static int pop_size = 30;
+    final static int pop_size = 100;
     final static int init_example_num = 10;
 
     public static void main(String[] args) {
-        args = new String[3];
-        args[0] = "example/getbiggestrect.log";
-        args[1] = "example/getbiggestrect.test";
-        args[2] = "60"; 
         if (args.length != 3) {
             System.out.println("usage: java SynthMain [log_file] [test_file] [timeout_per_synthesis]");
             return;
@@ -124,6 +120,7 @@ public class SynthMain {
             Mutation mutation = new Mutation(funName, paNames, synthSet);
             for (int i = 0; i < new_size; i++) {
                 EuSolverExecutor mutatedSpec = mutation.mutate(newSpec.get(i), last_id);
+                if (mutatedSpec == null) continue;
                 SynthNode mutant = new SynthNode();
                 mutant.setId(last_id++);
                 newPop.add(mutant);
