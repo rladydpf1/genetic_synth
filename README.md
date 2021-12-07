@@ -29,6 +29,9 @@ I will use the tournament selection method.
 ### Crossover operator.
 Before crossover, we need to collect operators and constants used in the actual synthesized program, not in the specification. In addition, a simple constant folding is also applied (ex. from 1 + 1 + 1 to 3). In this case, the constant '3' is actually used, and if '+' and '1' are not used elsewhere, '+' and '1' are excluded in the child. Then the child only has the union of actually used parts between its parents. That is the crossover operation of syntactic restrictions. The crossover operator of in/output examples is just the union of in/output examples in its parents.
 
+![alt text](figure1.png "figure1")
+By default, the fixed grammar elements are all parameters, '1', 'ite (if-then-else)', and '=='.
+
 ### Mutation operator.
 There are deleting in/output examples, deleting grammars, adding in/output examples, and adding grammars. These operators are randomly performed.
 
