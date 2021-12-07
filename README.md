@@ -14,7 +14,7 @@ Now moving on to the in/output example combinations, It is also the NP problem b
 
 ## Design decision explaining why you select:
 ### Parameters such as the size of an initial population.
-The size of initial population: (the number of available processors) * 2.  
+The size of initial population: `(the_number_of_available_processors) * 2`.  
 Timeout for synthesizing each program (individual): given by user.
 
 ### Stopping criteria.
