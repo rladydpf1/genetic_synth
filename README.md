@@ -14,8 +14,8 @@ Now moving on to the in/output example combinations, It is also the NP problem b
 
 ## Design decision explaining why you select:
 ### Parameters such as the size of an initial population.
-The size of initial population: (the number of available processors) * 2;
-Time for synthesizing each program: given by user.
+The size of initial population: (the number of available processors) * 2.  
+Timeout for synthesizing each program (individual): given by user.
 
 ### Stopping criteria.
 It stops if the 100% accuracy is acheived or total execution timeout (within a hour) is exceeded.
@@ -27,10 +27,25 @@ The accuracy of each synthesized program (individual) is evaluated by executing 
 I will use the tournament selection method.
 
 ### Crossover operator.
-Before crossover, we need to collect parameters, operators, and constants used in the actual synthesized, not in the specification. In addition, a simple constant folding is also needed (ex. from 1 + 1 + 1 to 3). In this case, the constant '3' is actually used, and if the constant '1' is not used elsewhere, '1' is not actually used. Then the child only has the union of actually used parts between its parents. That is the crossover operation of syntactic restrictions. The crossover operator of in/output examples is just the union of random combinations of in/output examples in each parent.
+Before crossover, we need to collect operators and constants used in the actual synthesized program, not in the specification. In addition, a simple constant folding is also applied (ex. from 1 + 1 + 1 to 3). In this case, the constant '3' is actually used, and if '+' and '1' are not used elsewhere, '+' and '1' are excluded in the child. Then the child only has the union of actually used parts between its parents. That is the crossover operation of syntactic restrictions. The crossover operator of in/output examples is just the union of in/output examples in its parents.
 
 ### Mutation operator.
 There are deleting in/output examples, deleting grammars, adding in/output examples, and adding grammars. These operators are randomly performed.
 
 ### Generational selection strategy.
 All individuals are sorted in the order of high scores in the fitness function, and only the number of the initial population is selected as the next population.
+
+## How to compile and execute:
+### Compilation.
+You need to compile Eusolver and Z3 (a SMT solver used by Eusolver). If you already have Z3, then change the value `HAVE_Z3=yes` in `eusolver/scripts/build.sh`.
+```
+cd eusolver/scripts
+./build.sh
+cd ..
+cd ..
+./compile.sh
+```
+### Execution.
+```
+java -cp ./class synth.SynthMain [log_file] [test_file] [timeout_per_synthesis]
+```
