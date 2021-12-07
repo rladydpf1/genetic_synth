@@ -64,7 +64,6 @@ public class SynthMain {
         HashMap<Integer, Float> fitnessValues = new HashMap<>();
         Float bestSoFar = -1F;
         SynthNode bestIndividual = null;
-        int chance = 3;
         int last_id = pop.size();
         
         do {
@@ -84,7 +83,6 @@ public class SynthMain {
                 bestSoFar = localBest;
                 bestIndividual = pop.get(ranking.get(0));
                 isUpdated = true;
-                chance = 3;
             }
             if (isUpdated) {
                 System.out.println("==================================");
@@ -92,9 +90,9 @@ public class SynthMain {
                 System.out.println("Best indivisual: " + bestIndividual.getCode().getCCode());
                 System.out.println(String.format("Best-so-far: %.1f%%", bestSoFar));
                 if (bestSoFar == 100F) break;
-            } else chance--;
-            if (chance == 0) {
-                System.out.println("not improved.");
+            }
+            if ((System.currentTimeMillis() - beforeTime) / 1000 >= 3600) {
+                System.out.println("not improved after 1 hour.");
                 break;
             }
 

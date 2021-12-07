@@ -16,7 +16,7 @@ public class Mutation {
     ArrayList<String> paNames;
     HashSet<LogData> synthSet;
 
-    private final List<String> operators_Int = Arrays.asList("+", "-", "*", "/", "ite");
+    private final List<String> operators_Int = Arrays.asList("+", "-", "*", "div", "ite");
     private final List<String> operators_Bool = Arrays.asList("<", "<=", ">", ">=", "or", "and", "=");
 
     public Mutation(String funName, ArrayList<String> paNames, HashSet<LogData> synthSet) {
