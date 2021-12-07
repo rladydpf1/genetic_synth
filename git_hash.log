@@ -1,0 +1,250 @@
+commit 2b2249ba43c434fa19e936ca8b0b752f3a617883
+Author: rladydpf1 <45200209+rladydpf1@users.noreply.github.com>
+Date:   Wed Dec 8 02:53:29 2021 +0900
+
+    Update README.md
+
+commit 28e3cae37cb24494dc88e847c1c339b23e49a36a
+Author: rladydpf1 <45200209+rladydpf1@users.noreply.github.com>
+Date:   Wed Dec 8 02:52:23 2021 +0900
+
+    Update README.md
+
+commit b786f5c79b40d5b7c75a7e9d1c1a5a306fccefef
+Author: rladydpf1 <45200209+rladydpf1@users.noreply.github.com>
+Date:   Wed Dec 8 02:27:41 2021 +0900
+
+    Add files via upload
+
+commit b39b3ee2fe20b1beaf04e8875389068183a5a13f
+Author: rladydpf1 <45200209+rladydpf1@users.noreply.github.com>
+Date:   Wed Dec 8 02:27:24 2021 +0900
+
+    Delete figure1.png
+
+commit a9fab657b2a1bd51adb5dcd99cdd604b08ca1822
+Author: rladydpf1 <45200209+rladydpf1@users.noreply.github.com>
+Date:   Wed Dec 8 02:26:08 2021 +0900
+
+    Add files via upload
+
+commit c0b22a8ead680b53527dc1c52c9e29ee1e0bfd73
+Author: rladydpf1 <45200209+rladydpf1@users.noreply.github.com>
+Date:   Wed Dec 8 02:25:54 2021 +0900
+
+    Delete figure1.png
+
+commit b25f471cd6fbae77d080d06a0bae4f63cfdc4bcf
+Author: rladydpf1 <45200209+rladydpf1@users.noreply.github.com>
+Date:   Wed Dec 8 02:24:03 2021 +0900
+
+    Update README.md
+
+commit bbb216dc882a8f8235dd9c9d7bcea32269546aab
+Author: rladydpf1 <45200209+rladydpf1@users.noreply.github.com>
+Date:   Wed Dec 8 02:18:36 2021 +0900
+
+    Add files via upload
+
+commit 11524a17abfd8fcbe17b8e8bb0a602d57f79333b
+Merge: 95b5d22 340ddba
+Author: Yoel Kim <kimyoel2305@gmail.com>
+Date:   Wed Dec 8 01:33:31 2021 +0900
+
+    Merge branch 'main' of https://github.com/rladydpf1/genetic_synth into main
+
+commit 95b5d22af8d2621354daee6f2f46bbce405738d2
+Author: Yoel Kim <kimyoel2305@gmail.com>
+Date:   Wed Dec 8 01:33:26 2021 +0900
+
+    minor changes
+
+commit 340ddba2b6d5f55dcefc9e5f78713ce08bb1934b
+Author: rladydpf1 <45200209+rladydpf1@users.noreply.github.com>
+Date:   Wed Dec 8 01:30:08 2021 +0900
+
+    Update README.md
+
+commit a6beb542fde05aa8b05bc2e066d638a37462eace
+Author: rladydpf1 <45200209+rladydpf1@users.noreply.github.com>
+Date:   Wed Dec 8 01:16:28 2021 +0900
+
+    Update README.md
+
+commit ee91429ffe073c2d4fb6fff6dcf34b3cba1f216a
+Author: Yoel Kim <kimyoel2305@gmail.com>
+Date:   Wed Dec 8 00:51:07 2021 +0900
+
+    minor changes
+
+commit 07f1e38219d9acdf33e0d5d64fd2743b7128e4f9
+Author: Yoel Kim <kimyoel2305@gmail.com>
+Date:   Tue Dec 7 18:56:55 2021 +0900
+
+    modify some codes
+
+commit 6560c20fe484e58e6c1150b201b66587a3168008
+Author: Yoel Kim <kimyoel2305@gmail.com>
+Date:   Tue Dec 7 15:21:37 2021 +0900
+
+    add compile.sh file and class files.
+
+commit 40486d553560f02d910e349cd2085855cd11bb60
+Author: Yoel Kim <kimyoel2305@gmail.com>
+Date:   Mon Dec 6 02:00:24 2021 +0900
+
+    implemenation of mutation.
+
+commit f4655c866afcbea2ac56c72dca179d3309170aad
+Merge: 24ad152 148a29f
+Author: Yoel Kim <kimyoel2305@gmail.com>
+Date:   Sun Dec 5 23:38:36 2021 +0900
+
+    Merge branch 'main' of https://github.com/rladydpf1/genetic_synth into main
+
+commit 24ad1527778f2d0d036b4cb337c00211eef7c315
+Author: Yoel Kim <kimyoel2305@gmail.com>
+Date:   Sun Dec 5 23:38:29 2021 +0900
+
+    commit
+
+commit 148a29f1553d1fc25f6c6ecf459891511ce1db88
+Author: rladydpf1 <45200209+rladydpf1@users.noreply.github.com>
+Date:   Sun Dec 5 23:34:08 2021 +0900
+
+    Create .out
+
+commit d9160b5fb144d02421b56e5c960aebaaefff02cb
+Merge: 8772784 cf8bcbb
+Author: rladydpf1 <45200209+rladydpf1@users.noreply.github.com>
+Date:   Sun Dec 5 23:18:57 2021 +0900
+
+    Merge pull request #5 from rladydpf1/master
+    
+    minor edit
+
+commit cf8bcbb6e601ed59d4ff257ddfc5e2d6c1d28027
+Author: rladydpf1 <rladydpf1@gmail.com>
+Date:   Sun Dec 5 23:17:33 2021 +0900
+
+    minor edit
+
+commit 8772784e9858497db2c19e0b379b01ad57b05133
+Merge: a054f33 6652070
+Author: rladydpf1 <45200209+rladydpf1@users.noreply.github.com>
+Date:   Sun Dec 5 22:39:21 2021 +0900
+
+    Merge pull request #4 from rladydpf1/master
+    
+    implementation of crossover.
+
+commit 66520700e91cebbee9a2150190670afcbca5f91a
+Author: rladydpf1 <rladydpf1@gmail.com>
+Date:   Sun Dec 5 22:38:58 2021 +0900
+
+    implementation of crossover.
+
+commit a054f33ff7244119380a177ad5915d2d3a9dd338
+Merge: 84a6db6 573955e
+Author: rladydpf1 <45200209+rladydpf1@users.noreply.github.com>
+Date:   Sun Dec 5 19:28:06 2021 +0900
+
+    Merge pull request #3 from rladydpf1/master
+    
+    initial population is implemented
+
+commit 573955ea075bd6c13e27bb436dd776b7bd9501a4
+Author: rladydpf1 <rladydpf1@gmail.com>
+Date:   Sun Dec 5 19:27:24 2021 +0900
+
+    initial population is implemented
+
+commit 84a6db6bc476e6dbd1d6e65c8b72202d3dce9f33
+Merge: b1e90e5 a1e654e
+Author: rladydpf1 <45200209+rladydpf1@users.noreply.github.com>
+Date:   Sat Dec 4 21:12:52 2021 +0900
+
+    Merge pull request #2 from rladydpf1/master
+    
+    push eusolver codes.
+
+commit a1e654ee41ececf30b6ee48817ae7ffee2d306a3
+Author: rladydpf1 <rladydpf1@gmail.com>
+Date:   Sat Dec 4 21:10:49 2021 +0900
+
+    push eusolver codes.
+
+commit b1e90e5f6a59f93ad1937ea92ab914ec2b4eef82
+Merge: 5cb58d4 085adc7
+Author: rladydpf1 <45200209+rladydpf1@users.noreply.github.com>
+Date:   Sat Dec 4 20:57:57 2021 +0900
+
+    Merge pull request #1 from rladydpf1/master
+    
+    Existing synthesis driver code.
+
+commit 085adc734b28e15e6ca69cf1218c6362e1f6f486
+Author: rladydpf1 <rladydpf1@gmail.com>
+Date:   Sat Dec 4 20:56:33 2021 +0900
+
+    Existing synthesis driver code.
+
+commit 5cb58d47fdab7f6edd00a92a5e60006abacc7f62
+Author: rladydpf1 <45200209+rladydpf1@users.noreply.github.com>
+Date:   Sun Nov 28 22:15:20 2021 +0900
+
+    Update README.md
+
+commit 422816df4955ed0952c141dc57bb95ddb0dec149
+Author: rladydpf1 <45200209+rladydpf1@users.noreply.github.com>
+Date:   Sun Nov 28 22:13:43 2021 +0900
+
+    Update README.md
+
+commit a2fcde6b9b7d21521fb2a6ff50f2436b8ca70a37
+Author: rladydpf1 <45200209+rladydpf1@users.noreply.github.com>
+Date:   Sun Nov 28 22:09:38 2021 +0900
+
+    Update README.md
+
+commit bca64e6eb8491a0e0c77b740d1d2913956118970
+Author: rladydpf1 <45200209+rladydpf1@users.noreply.github.com>
+Date:   Sun Nov 28 21:40:43 2021 +0900
+
+    Update README.md
+
+commit f9ab65ecf424a792b82f21a75bc32b7ba190dec1
+Author: rladydpf1 <45200209+rladydpf1@users.noreply.github.com>
+Date:   Sun Nov 28 21:08:41 2021 +0900
+
+    Update README.md
+
+commit 81f6cc759b3c77d0d6529681106e0ceb1a6bb5c2
+Author: rladydpf1 <45200209+rladydpf1@users.noreply.github.com>
+Date:   Sun Nov 28 20:09:27 2021 +0900
+
+    Update README.md
+
+commit 9aebe601be3e66395c4bff3cc41e03043ed36546
+Author: rladydpf1 <45200209+rladydpf1@users.noreply.github.com>
+Date:   Sun Nov 28 19:46:00 2021 +0900
+
+    Update README.md
+
+commit 964a92302c9c482c17d0db0d87ec20243a1401c7
+Author: rladydpf1 <45200209+rladydpf1@users.noreply.github.com>
+Date:   Sun Nov 28 19:44:34 2021 +0900
+
+    Update README.md
+
+commit f4099912dbfcd2f5670b770c12ef49ec7cccfca5
+Author: rladydpf1 <45200209+rladydpf1@users.noreply.github.com>
+Date:   Sun Nov 28 19:06:56 2021 +0900
+
+    Update README.md
+
+commit 0f74b9514b865113f5d0786915a5f37c7f3982ea
+Author: rladydpf1 <45200209+rladydpf1@users.noreply.github.com>
+Date:   Sun Nov 28 17:57:59 2021 +0900
+
+    Initial commit
