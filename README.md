@@ -48,9 +48,7 @@ All individuals are sorted in the order of high scores in the fitness function, 
 ### Compilation.
 You need to compile Eusolver and Z3 (a SMT solver used by Eusolver). If you already have Z3, then change the value `HAVE_Z3=yes` in `eusolver/scripts/build.sh`.
 ```
-cd eusolver/scripts
-./build.sh
-cd ..
+./eusolver/build.sh
 cd ..
 ./compile.sh
 ```
